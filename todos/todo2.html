@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: aqua;
+        }
+        .box-wrapper {
+            width: 400px;
+            height: 500px;
+            background-color: white;
+            margin: auto;
+            margin-top: 150px;
+        }
+        .text-wrapper {
+            width: 100%;
+            height: 60px;
+            padding-top: 25px;
+        }
+        img {
+            width: 50px;
+            height: 50px;
+            float: left;
+            margin-left: 90px;
+        }
+        .text {
+            margin: 8px 191px;
+            text-align: center;
+            width: 115px;
+            height: 35px;
+            line-height: 35px;
+            background-color: coral;
+            font-family: 华文彩云;
+            font-size: 27px;
+            border-radius: 5px 5px  46% 5px;
+        }
+        .title-wrapper {
+            width: 100%;
+            height: 70px;
+            /* background-color: antiquewhite; */
+            text-align: center;
+            line-height: 70px;
+        }
+        .title {
+            width: 200px;
+            height: 32px;
+            border: none;
+            border-bottom: 2px dashed coral;
+            background-color: white;
+            color: grey;
+            outline: none;
+        }
+        .add {
+            width: 73px;
+            height: 32px;
+            font-family: 华文行楷;
+            font-size: 30px;
+            background-color: beige;
+        }
+        li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            list-style: none;
+            padding-left: 30px;
+            color: black;
+            position: relative;
+        }
+        .del {
+            position: absolute;
+            left: 295px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box-wrapper">
+        <div class="text-wrapper">
+            <img src="./图片.png" alt="">
+            <h3 class="text">todolist</h3>
+        </div>
+        <div class="title-wrapper">
+            <input type="text" placeholder="Add new todo..." class="title">
+            <button class="add">submit</button>
+        </div>
+        <ul>
+<input type="checkbox" class="quan">
+        </ul>
+    </div>
+</body>
+</html>
+<script>
+    // 获取元素
+    var title = document.querySelector(".title")
+    var add = document.querySelector('.add')
+    var ul = document.querySelector(".ul")
+
+    // 自动获取焦点
+    title.focus()
+    // 键盘事件
+    title.onkeyup = function(e) {
+        // 非空判断
+        if(e.keyCode == 13) {
+            if (title.value == "")  {
+                alert("内容不能为空")
+            } else {
+                // 创建li
+                var li = document.createElement("li")
+                li.innerHTML=`
+                <li>
+                    <input type="checkbox" class="xuan">
+                    ${title.value}
+                    <span class="del">X</span>
+                </li>
+                `
+                ul.appendChild(li)
+            }
+        }
+        // 点击事件
+        add.onclick = function(e) {
+        // 非空判断
+            if (title.value == "") {
+                alert("内容不能为空")
+            }else {
+                // 创建li 写入 添加删除
+                var li = document.createElement("li")
+                li.innerHTML=`
+                <li>
+                    <input type="checkbox" class="xuan">
+                    ${title.value}
+                    <span class="del">X</span>
+                </li>
+                `
+                ul.appendChild(li)
+            }
+        }
+        // 删除
+        ul.addEventListener("click", function(e) {
+            // 判断是否是删除按钮执行
+            if(e.target.className == "del") {
+                ul.removeChild(e.target.parentNode.parentNode)
+            }
+        })
+        // 复选框选中的li标签出现删除线
+        ul.addEventListener("click", function(e) {
+            if(e.target.className == "xuan") {
+                e.target.parentNode.parentNode.style.textDecoration = "line-through"
+            }
+        })
+    }
+</script>

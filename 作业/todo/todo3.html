@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./todo.css">
+</head>
+
+<body>
+    <div class="box-wrapper">
+        <div class="text-wrapper">
+            <img src="./图片.png" alt="">
+            <h3 class="text">todolist</h3>
+        </div>
+        <hr>
+        <div class="line">
+            <h3>~Today I need to...~</h3>
+        </div>
+        <div class="title-wrapper">
+            <input type="text" placeholder="Add new todo..." class="title">
+            <button class="add">submit</button>
+        </div>
+        <div class="box">
+            <ul>
+
+            </ul>
+        </div>
+
+        <div class="btn-wrapper">
+            <span class="item-lift">0</span>item-lift
+            <span class="all">All</span>
+            <span class="active">Active</span>
+            <span class="completed">Completed</span>
+            <span class="clear">Clear-completed</span>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    // 获取元素
+    var title = document.querySelector(".title")
+    var add = document.querySelector(".add")
+    var ul = document.querySelector('ul')
+    var item = document.querySelector('.item-lift')
+    var all = document.querySelector('.all')
+    var completed = document.querySelector('.completed')
+    var active = document.querySelector('.active')
+    var clear = document.querySelector('.clear')
+
+
+    // 输入框自动获取焦点
+    title.focus()
+    // 键盘事件
+    title.onkeyup = function (e) {
+        // 非空判断
+        if (e.keyCode == 13) {
+            // 创建li 写入 添加删除
+            var li = document.createElement("li")
+            li.innerHTML = `      
+            <input type="checkbox" class="xuan">
+            <span>
+                ${title.value}
+            </span>
+            <span class="del">X</span>
+                `
+            ul.appendChild(li)
+            li.setAttribute("index", 1)
+            // 清空input内容
+            title.value = ""
+            // 获取li的长度
+            item.innerHTML = ul.children.length
+            // 未完成
+            active.onclick = function () {
+                var fx = document.querySelectorAll('.xuan')
+                for (var i = 0; i < fx.length; i++) {
+                    if (fx[i].parentNode.getAttribute('index') == 1) {
+                        fx[i].parentNode.style.display = 'block'
+                    } else{
+                        fx[i].parentNode.style.display = 'none'
+                    }
+                }
+            }
+
+            // 已完成
+            completed.onclick = function () {
+                var fx = document.querySelectorAll('.xuan')
+                for (var i = 0; i < fx.length; i++) {
+                    if (fx[i].parentNode.getAttribute('index') == 2) {
+                        fx[i].parentNode.style.display = 'block'
+                    } else {
+                        fx[i].parentNode.style.display = 'none'
+                    }
+                }
+            }
+        }
+    }
+    // 删除
+    ul.addEventListener("click", function (e) {
+        // 判断是否是删除按钮执行
+        if (e.target.className == "del") {
+            ul.removeChild(e.target.parentNode)
+        }
+    })
+    // 点击事件
+    add.onclick = function (e) {
+        // 创建li 写入 添加删除
+        var li = document.createElement("li")
+        li.innerHTML = `  
+            <input type="checkbox" class="xuan" index= 1>
+            <span>
+                ${title.value}
+            </span>
+            <span class="del">X</span>
+                `
+        ul.appendChild(li)
+        // 清空input内容
+        title.value = ""
+        li.setAttribute("index", 1)
+        item.innerHTML = ul.children.length
+        // 未完成
+        active.onclick = function () {
+            var fx = document.querySelectorAll('.xuan')
+            for (var i = 0; i < fx.length; i++) {
+                if (fx[i].parentNode.getAttribute('index') == 1) {
+                    fx[i].parentNode.style.display = 'block'
+                } else {
+                    fx[i].parentNode.style.display = 'none'
+                }
+            }
+        }
+
+        // 已完成
+        completed.onclick = function () {
+            var fx = document.querySelectorAll('.xuan')
+            for (var i = 0; i < fx.length; i++) {
+                if (fx[i].parentNode.getAttribute('index') == 2) {
+                    fx[i].parentNode.style.display = 'block'
+                } else {
+                    fx[i].parentNode.style.display = 'none'
+                }
+            }
+        }
+    }
+
+    ul.onclick = function (e) {
+        // console.log(e);
+        // e.target是当前点击的input
+        // console.log(e.target);
+        if (e.target.nodeName == "INPUT" || e.target.checked) {
+            // 点击复选框li标签出现删除线
+            e.target.parentNode.style.textDecoration = "line-through"
+            // 点击复选框li标签进行180°翻转
+            e.target.parentNode.className = "zjn"
+            // 让内容进行翻转
+            e.target.parentNode.children[1].className = "zjn123"
+            e.target.parentNode.setAttribute("index", 2)
+        }
+        if (e.target.checked) {
+            // 翻转复选框
+            e.target.parentNode.children[0].className = "zjn567"
+        }
+        if (e.target.checked != true) {
+            // 如果不是选中状态那么取消删除线
+            e.target.parentNode.style.textDecoration = "none"
+            // li标签内容不翻转
+            e.target.parentNode.children[1].className = "zjn777"
+            // 回到原来的状态
+            e.target.parentNode.className = "zjn888"
+            e.target.parentNode.setAttribute("index", 1)
+
+        }
+    }
+
+    // 清空所有的li
+    clear.onclick = function (e) {
+        ul.innerHTML = ""
+    }
+
+    // 未完成
+    // active.onclick = function () {
+    //     var fx = document.querySelectorAll('.xuan')
+    //     for (var i = 0; i < fx.length; i++) {
+    //         if (fx[i].parentNode.getAttribute('index') == 1) {
+    //             fx[i].parentNode.style.display = 'block'
+    //         } else {
+    //             fx[i].parentNode.style.display = 'none'
+    //         }
+    //     }
+    // }
+
+    // // 已完成
+    // completed.onclick = function () {
+    //     var fx = document.querySelectorAll('.xuan')
+    //     for (var i = 0; i < fx.length; i++) {
+    //         if (fx[i].getAttribute('index') == 2) {
+    //             fx[i].parentNode.style.display = 'block'
+    //         } else {
+    //             fx[i].parentNode.style.display = 'none'
+    //         }
+    //     }
+    // }
+</script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点名器</title>
+    <style>
+        body {
+            width: 100%;
+            background-color: beige;
+        }
+
+        ul {
+            box-sizing: border-box;
+            padding-top: 50px;
+            outline: none;
+            width: 1200px;
+            height: 600px;
+            background-color: aqua;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .itemli {
+            width: 120px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            list-style: none;
+            background-color: pink;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        #get {
+            background-color: rgb(38, 153, 235);
+            color: rgb(0, 86, 30);
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text">
+    <button class="additem">点击按钮添加名单人员</button>
+    <ul>
+
+    </ul>
+    <button class="suiji">随机点名</button>
+    <button class="twoitem">随机选择两名</button>
+</body>
+
+</html>
+<script>
+    let itemarr = ['易烊千玺', '蔡少芬', '李嘉欣','赵丽颖','baby','迪丽热巴','杨紫','张佳宁','张嘉倪','张嘉译','杨幂','刘亦菲','刘诗诗','刘德华','黎明','王俊凯','王源','张艺兴']
+    var ul = document.querySelector('ul')
+    var onest = document.querySelector('.suiji')
+    var timer = null
+    var timeid = 0
+    var times = 20
+    this.itemstyle(itemarr)
+    function itemstyle(arr) {
+        arr.forEach((item) => {
+            li = document.createElement('li')
+            li.innerHTML = `${item}`
+            li.setAttribute('class', 'itemli')
+            ul.appendChild(li)
+        });
+    }
+    let lis=document.querySelectorAll('li')
+    onest.onclick = function (timer) {
+        timer = setInterval(() => {
+            var x = lis.length - 1
+            var y = 0
+            var res = parseInt(Math.random() * (x - y + 1) + y)
+            timeid = res
+            lis.forEach(item => {
+                item.removeAttribute('id')
+            })
+            lis[res].setAttribute('id', 'get')
+            times--
+            if (times <= 1) {
+                clearInterval(timer)
+                times = 20
+            }
+        }, 100)
+    }
+    twost.onclick = function (timer) {
+        timer = setInterval(() => {
+            var x = lis.length - 1
+            var y = 0
+            var res = parseInt(Math.random() * (x - y + 1) + y)
+            timeid = res
+            lis.forEach(item => {
+                item.removeAttribute('id')
+            })
+            lis[res].setAttribute('id', 'get')
+            times--
+            if (times <= 1) {
+                clearInterval(timer)
+                times = 40
+            }
+        }, 50)
+    }
+
+
+
+</script>

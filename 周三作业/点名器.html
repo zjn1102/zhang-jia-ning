@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点名器</title>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+        }
+        #box {
+            width: 1530px;
+            height: 750px;
+            background-color: antiquewhite;
+            color: black;
+            position: relative;
+            font-size: 35px;
+        }
+        #left {
+            position: absolute;
+            top: 205px;
+            left: 465px;
+            cursor: pointer;
+        }
+        #right {
+            position: absolute;
+            top: 205px;
+            right: 465px;
+            cursor: pointer;
+        }
+        #name {
+            position: absolute;
+            top: 365px;
+            left: 658px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="left">随机选中一个</div>
+        <div id="right">随机选中两个</div>
+        <div id="name">Who he/she is</div>
+    </div>
+    
+</body>
+</html>
+<script>
+    window.onload = function() {
+        let nameAll = ['崔宇彤','李博','党少龙','包胜利','郭俊','王帅琦','王闫凯','陈芸','李娅','李吉森','李沛沛','李思佳','高双娇','陈雯轩','张嘉宁和易烊千玺']
+        let nameAll1 = ['崔宇彤','李博','党少龙','包胜利','郭俊','王帅琦','王闫凯','陈芸','李娅','李吉森','李沛沛','李思佳','高双娇','陈雯轩','张嘉宁和易烊千玺']
+        let oneName = document.getElementById('left')
+        let twoName = document.getElementById('right')
+        let nameList = document.getElementById('name')
+        let flag = true
+        
+        // 随机选取一个
+        oneName.onclick = function() {
+            if(flag) {
+                // 修改文本
+                oneName.style.color = 'red'
+                oneName.innerHTML = '停止'
+                // 定时器
+                let timer = setInterval(function() {
+                    // 随机数
+                    let i = Math.floor(Math.random() * nameAll.length)
+                    // 将name添加到页面
+                    nameList.innerHTML = nameAll[i]
+                    // 停止定时器
+                    if (flag == true) {
+                        clearInterval(timer)
+                    }
+                }, 50)
+            } else {
+                // 再次点击恢复原样
+                oneName.style.color = 'black'
+                oneName.innerHTML = '随机选中一个'
+            }
+            flag = !flag
+        }
+
+        // 随机选取两个
+        twoName.onclick = function() {
+            if(flag) {
+                // 修改文本
+                twoName.style.color = 'red'
+                twoName.innerHTML = '停止'
+                // 定时器
+                let timer = setInterval(function() {
+                    // 随机数
+                    let i = Math.floor(Math.random() * nameAll.length)
+                    let t = Math.floor(Math.random() * nameAll1.length)
+                    // 将name添加到页面
+                    nameList.innerHTML = nameAll[i] + nameAll[t]
+                    // 停止定时器
+                    if (flag == true) {
+                        clearInterval(timer)
+                    }
+                }, 50)
+            } else {
+                // 再次点击恢复原样
+                twoName.style.color = 'black'
+                twoName.innerHTML = '随机选中两个'
+            }
+            flag = !flag
+        }
+    }
+
+</script>

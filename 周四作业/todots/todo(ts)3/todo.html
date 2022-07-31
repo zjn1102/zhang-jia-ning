@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo</title>
+    <link rel="stylesheet" href="./todo.css">
+</head>
+<body>
+    <div class="todo-wrapper">
+        <div class="top-wrapper">
+            <img src="./assest//edit.svg" alt="">
+            <h1>TodoList</h1>
+        </div>
+        <hr>
+        <div id="need">
+            ~ today I need do ~
+        </div>
+        <div class="add">
+            <input type="text" class="input" value="" placeholder="add need i do..." onkeydown="addTodo(event)" />
+            <button class="tijiao" onclick="addTodo()">submit</button>
+        </div>
+        <ul>
+
+        </ul>
+        <div class="dibu">
+            <span  id="count"></span>num
+            <button id="allren" onclick="dall()">all</button>
+            <button id="yiwc" onclick="yiwcheng()">getall</button>
+            <button id="weiwc" onclick="weiwcheng()">noneall</button>
+            <button id="qing" onclick="qingAll()">clear</button>
+        </div>
+    </div>
+</body>
+<script src="./todo.js"></script>
+</html>
